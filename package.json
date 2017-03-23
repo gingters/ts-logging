@@ -1,11 +1,12 @@
 {
   "name": "ts-logging",
-  "version": "0.9.0-alpha-1",
+  "version": "0.0.1",
   "description": "A serilog-like logging framework for javascript / typescript or angular projects",
-  "main": "ts-logging.js",
+  "main": "dist/ts-logging.js",
   "scripts": {
     "test": "test",
-    "build": "tsc"
+    "build": "tsc",
+    "release": "standard-version"
   },
   "keywords": [
     "js",
@@ -17,9 +18,13 @@
     "serilog",
     "structured"
   ],
+  "files": [
+    "dist/"
+  ],
   "author": "Sebastian P.R. Gingter <sebastian@gingter.org>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "standard-version": "^4.0.0",
     "typescript": "^2.2.1"
   }
 }

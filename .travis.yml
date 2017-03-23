@@ -1,5 +1,20 @@
 # travis build script for ts-logging
 language: javascript
+
 node_js:
   - "6"
-script: npm run build
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+deploy:
+  provider: npm
+  email: sebastian@gingter.org
+  api_key: $NPM_TOKEN
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
