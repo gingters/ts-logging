@@ -1,0 +1,5 @@
+# travis build script for ts-logging
+language: javascript
+node_js:
+	- "6"
+script: npm run build
