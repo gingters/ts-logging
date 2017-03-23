@@ -12,6 +12,10 @@
     "type": "git",
     "url": "https://github.com/gingters/ts-logging"
   },
+  "engines": {
+    "node": ">=4.2.0",
+    "npm": ">=3.0 <4.0"
+  },
   "keywords": [
     "js",
     "ts",
