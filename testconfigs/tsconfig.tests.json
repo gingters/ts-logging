@@ -1,0 +1,10 @@
+{
+	"extends": "../tsconfig.es5.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"declaration": false,
+		"outDir": "../tests"
+	},
+	"include": ["../src/**/*.ts"],
+	"exclude": []
+}

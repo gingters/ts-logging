@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es6",
 		"module": "es2015",
 		"sourceMap": true,
 		"moduleResolution": "node",
@@ -13,8 +13,11 @@
 			"dom"
 		]
 	},
-	"files": [
-		"./src/ts-logging.ts"
+	"include": [
+		"./src/**/*.ts"
+	],
+	"exclude": [
+		"**/*.spec.ts"
 	],
 	"angularCompilerOptions": {
 		"skipTemplateCodegen": true
