@@ -8,7 +8,7 @@
     "build": "tsc",
     "build-tests": "tsc -p ./testconfigs/tsconfig.tests.json",
     "build-tests-watch": "tsc -p ./testconfigs/tsconfig.tests.json -w",
-    "rebuild" : "rimraf dist && npm run build",
+    "rebuild": "rimraf dist && npm run build",
     "rebuild-tests": "rimraf tests coverage && npm run build-tests",
     "release": "standard-version",
     "test": "npm run test-mocha  && npm run test-karma",
@@ -60,5 +60,9 @@
     "standard-version": "^4.0.0",
     "typescript": "~2.1.6",
     "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "moment": "^2.18.1",
+    "rxjs": "^5.2.0"
   }
 }
