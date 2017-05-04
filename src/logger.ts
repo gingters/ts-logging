@@ -1,13 +1,13 @@
 import { LogEventSink } from './logEventSink';
 import { LogLevel } from './logLevel';
-import { MessageTemplate } from './messageTemplate';
+import { MessageRenderer } from './messageRenderer';
 import { LogEvent } from './logEvent';
 
 export class Logger {
 
 	constructor(private sink: LogEventSink) { }
 
-	trace(errorOrMessage: Error | string, ...args: any[]) {
+	public trace(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
 			this.log(LogLevel.trace, errorOrMessage, args[0], args.slice(1));
 		} else {
@@ -15,7 +15,7 @@ export class Logger {
 		}
 	}
 
-	debug(errorOrMessage: Error | string, ...args: any[]) {
+	public debug(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
 			this.log(LogLevel.debug, errorOrMessage, args[0], args.slice(1));
 		} else {
@@ -23,15 +23,15 @@ export class Logger {
 		}
 	}
 
-	info(errorOrMessage: Error | string, ...args: any[]) {
+	public info(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
-			this.log(LogLevel.information, errorOrMessage, args[0], args.slice(1));
+			this.log(LogLevel.info, errorOrMessage, args[0], args.slice(1));
 		} else {
-			this.log(LogLevel.information, null, errorOrMessage, args);
+			this.log(LogLevel.info, null, errorOrMessage, args);
 		}
 	}
 
-	warn(errorOrMessage: Error | string, ...args: any[]) {
+	public warn(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
 			this.log(LogLevel.warning, errorOrMessage, args[0], args.slice(1));
 		} else {
@@ -39,7 +39,7 @@ export class Logger {
 		}
 	}
 
-	error(errorOrMessage: Error | string, ...args: any[]) {
+	public error(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
 			this.log(LogLevel.error, errorOrMessage, args[0], args.slice(1));
 		} else {
@@ -47,18 +47,23 @@ export class Logger {
 		}
 	}
 
-	fatal(errorOrMessage: Error | string, ...args: any[]) {
+	public critical(errorOrMessage: Error | string, ...args: any[]) {
 		if (errorOrMessage instanceof Error) {
-			this.log(LogLevel.fatal, errorOrMessage, args[0], args.slice(1));
+			this.log(LogLevel.critical, errorOrMessage, args[0], args.slice(1));
 		} else {
-			this.log(LogLevel.fatal, null, errorOrMessage, args);
+			this.log(LogLevel.critical, null, errorOrMessage, args);
 		}
 	}
 
 	private log(logLevel: LogLevel, error: Error, message: string, params: any[]) {
-		const messageTemplate = new MessageTemplate(message);
-		const logEvent = new LogEvent(logLevel, messageTemplate, params, error);
-		this.sink.emit(logEvent);
+		try {
+			const messageTemplate = new MessageRenderer(message);
+			
+			const logEvent = new LogEvent(logLevel, messageTemplate, params, error);
+			this.sink.emit(logEvent);
+		} catch(e) {
+			throw e;
+		}
 	};
 
 }

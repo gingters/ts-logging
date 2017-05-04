@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { Logger } from './logger';
 import { LogEvent } from './logEvent';
-import { MessageTemplate } from './messageTemplate';
+import { MessageRenderer } from './messageRenderer';
 import { LogLevel } from './logLevel';
 import { LogEventSink } from './logEventSink';
 
@@ -31,9 +31,9 @@ describe('Logger', () => {
 				expect(subject).not.to.be.undefined;
 				expect(subject.logLevel).to.be.equal(LogLevel.trace);
 
-				expect(subject.messageTemplate).not.to.be.undefined;
-				expect(subject.messageTemplate.rawMessage).not.to.be.undefined;
-				expect(subject.messageTemplate.rawMessage).to.be.equal('This is the message template string');
+				expect(subject.renderer).not.to.be.undefined;
+				expect(subject.renderer.rawMessage).not.to.be.undefined;
+				expect(subject.renderer.rawMessage).to.be.equal('This is the message template string');
 
 				expect(subject.timestamp).not.to.be.undefined;
 				expect(subject.error).not.to.be.undefined;

@@ -1,14 +1,24 @@
 
 export enum LogLevel {
 	off = 0,
-	fatal = 1 << 0,
-	error = fatal | 1 << 1,
-	warning = error | 1 << 2,
-	information = warning | 1 << 3,
-	debug = information | 1 << 4,
-	trace = debug | 1 << 5,
+	critical = 1,
+	error = 2,
+	warning = 3,
+	info = 4,
+	debug = 5,
+	trace = 6,
 }
 
-export function checkIsLogLevelInTarget(level: LogLevel, target: LogLevel): boolean {
-	return (typeof level === 'undefined') || ((level & target) === target);
+export function isAllowed(level: LogLevel, filter: LogLevel | LogLevel[]): boolean {
+	if (filter === LogLevel.off || filter === null)
+		return false;
+
+	if (typeof level === 'undefined')
+		return true;
+
+	if (Array.isArray(filter)) {
+		return filter.indexOf(level) > -1;
+	} else {
+		return level <= filter;
+	}
 }
